@@ -1,17 +1,31 @@
 from lista_circular import ListaCircular
 
 def main():
-    supply_chain = ListaCircular()
+    while True:
+        print("  SUPPLY CHAIN — Papa Región Sumapaz          ")
+        print("  Ingresa los datos de cada eslabón           ")
 
-    # 🔗 Eslabones reales del Sumapaz
-    supply_chain.insertar("Planificación: Organización de cultivos en Sumapaz")
-    supply_chain.insertar("Abastecimiento: Recolección en Pasca y Arbeláez")
-    supply_chain.insertar("Fabricación: Procesamiento Gama IV en Fusagasugá")
-    supply_chain.insertar("Entrega: Distribución a Bogotá")
-    supply_chain.insertar("Logística Inversa: Retorno de residuos para bioabono")
+        sc = ListaCircular()
 
-    # Mostrar el ciclo (2 vueltas controladas)
-    supply_chain.mostrar_ciclo(2)
+        municipios = sc.insertar_planificacion()
+        sc.insertar_abastecimiento(municipios)
+        sc.insertar_fabricacion()
+        sc.insertar_entrega()
+        sc.insertar_logistica_inversa()
+
+        vueltas = input("\n¿Cuántas vueltas quieres ver del ciclo? (Enter = 2): ").strip()
+        vueltas = int(vueltas) if vueltas.isdigit() else 2
+        sc.mostrar_ciclo(vueltas)
+
+        # ── Después de imprimir, pregunta si reiniciar ──
+        print("  ¿Deseas registrar una nueva cadena?         ")
+        print("  1. Sí, iniciar de nuevo                     ")
+        print("  2. No, salir del programa                   ")
+        opcion = input("  → Opción: ").strip()
+
+        if opcion == "2":
+            print("\n   Hasta luego.\n")
+            break
 
 if __name__ == "__main__":
     main()
